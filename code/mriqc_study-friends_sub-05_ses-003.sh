@@ -16,6 +16,7 @@
 export LOCAL_DATASET=$SLURM_TMPDIR/${SLURM_JOB_NAME//-/}/
 flock --verbose /lustre03/project/rrg-pbellec/ria-beluga/alias/cneuromod.friends.mriqc/.datalad_lock datalad clone ria+file:///lustre03/project/rrg-pbellec/ria-beluga#~cneuromod.friends.mriqc@main $LOCAL_DATASET
 cd $LOCAL_DATASET
+git-annex enableremote ria-beluga-storage
 datalad get -s ria-beluga-storage -J 4 -n -r -R1 . # get sourcedata/* containers
 if [ -d sourcedata/smriprep ] ; then
     datalad get -n sourcedata/smriprep sourcedata/smriprep/sourcedata/freesurfer
